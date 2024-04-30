@@ -1,0 +1,79 @@
+Loading intel/19.1.1.217
+  Loading requirement: intel-mkl/2020.1
+Loading intel-mpi/intel/2019.7
+  Loading requirement: ucx/1.9.0
+LAMMPS (23 Jun 2022)
+  using 1 OpenMP thread(s) per MPI task
+Reading data file ...
+  orthogonal box = (-6 -6 -6) to (6 6 6)
+  1 by 2 by 2 MPI processor grid
+  reading atoms ...
+  3 atoms
+  scanning bonds ...
+  1 = max bonds/atom
+  reading bonds ...
+  1 bonds
+Finding 1-2 1-3 1-4 neighbors ...
+  special bond factors lj:    0        0        0       
+  special bond factors coul:  0        0        0       
+     1 = max # of 1-2 neighbors
+     0 = max # of 1-3 neighbors
+     0 = max # of 1-4 neighbors
+     1 = max # of special neighbors
+  special bonds CPU = 0.000 seconds
+  read_data CPU = 0.004 seconds
+2 atoms in group ATOMS
+1 atoms in group CORES
+1 atoms in group DRUDES
+WARNING: No fixes with time integration, atoms won't move (src/verlet.cpp:60)
+Generated 0 of 3 mixed pair_coeff terms from geometric mixing rule
+Rebuild special list taking Drude particles into account
+Old max number of 1-2 to 1-4 neighbors: 1
+New max number of 1-2 to 1-4 neighbors: 1 (+0)
+Neighbor list info ...
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 8
+  ghost atom cutoff = 8
+  binsize = 4, bins = 3 3 3
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair coul/cut, perpetual
+      attributes: half, newton on
+      pair build: half/bin/newton
+      stencil: half/bin/3d
+      bin: standard
+Setting up Verlet run ...
+  Unit style    : real
+  Current step  : 0
+  Time step     : 1
+Per MPI rank memory allocation (min/avg/max) = 6.017 | 6.139 | 6.256 Mbytes
+   Step          CPU           TotEng         KinEng         PotEng         Press          Volume        Density    
+         0   0             -66.129918      0             -66.129918     -880.64804      1728           0.076776862  
+Loop time of 2.155e-06 on 4 procs for 0 steps with 3 atoms
+
+92.8% CPU use with 4 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Bond    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 2.155e-06  |            |       |100.00
+
+Nlocal:           0.75 ave           1 max           0 min
+Histogram: 1 0 0 0 0 0 0 0 0 3
+Nghost:          26.25 ave          30 max          23 min
+Histogram: 2 0 0 0 0 0 0 0 1 1
+Neighs:              1 ave           2 max           0 min
+Histogram: 1 0 0 0 0 2 0 0 0 1
+
+Total # of neighbors = 4
+Ave neighs/atom = 1.3333333
+Ave special neighs/atom = 0.66666667
+Neighbor list builds = 0
+Dangerous builds = 0
+Total wall time: 0:00:00

@@ -34,9 +34,11 @@ velocity DRUDES create ${TDK} 12345
 
 delete_bonds ATOMS multi
 
-fix TEMP all langevin/drude ${TK} 100. 1256 ${TDK} 20. 13977 zero yes
-fix NPH ATOMS rigid/nph/small molecule iso ${PBAR} ${PBAR} 500.
-fix NVE DRUDES nve
+#fix TEMP all langevin/drude ${TK} 100. 1256 ${TDK} 20. 13977 zero yes
+#fix NPH ATOMS rigid/nph/small molecule iso ${PBAR} ${PBAR} 500.
+#fix NVE DRUDES nve
+
+fix 1 all npt temp ${TK} ${TK} 100.0 iso ${PBAR} ${PBAR} 1000.0
 
 compute TEMP all temp/drude
 
@@ -45,5 +47,5 @@ thermo 20
 
 fix dmin all min/drude
 
-run 10000
+run 10
 

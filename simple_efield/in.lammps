@@ -31,5 +31,5 @@ thermo 20
 
 fix dmin all min/drude
 
-run 10
+run 1
 

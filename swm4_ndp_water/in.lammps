@@ -43,5 +43,7 @@ compute TEMP all temp/drude
 thermo_style custom step cpu etotal ke pe press vol density c_TEMP[1] c_TEMP[2]
 thermo 20
 
+fix dmin all min/drude
+
 run 10000
 

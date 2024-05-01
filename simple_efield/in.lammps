@@ -29,5 +29,7 @@ fix DRUDE all drude C D N
 thermo_style custom step cpu etotal ke pe press vol density
 thermo 20
 
-run 0
+fix dmin all min/drude
+
+run 10
 

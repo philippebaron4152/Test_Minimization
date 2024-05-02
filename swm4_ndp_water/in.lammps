@@ -7,7 +7,7 @@ angle_style harmonic
 special_bonds lj/coul 0.0 0.0 0.5
 
 pair_style lj/cut/coul/long 10.0
-kspace_style pppm 1.0e-6
+kspace_style ewald 1.0e-6
 
 comm_modify vel yes
 read_data data.lammps
@@ -38,10 +38,12 @@ fix TEMP all langevin/drude ${TK} 100. 1256 ${TDK} 20. 13977 zero yes
 fix NPH ATOMS rigid/nph/small molecule iso ${PBAR} ${PBAR} 500.
 fix NVE DRUDES nve
 
+#fix NPH ATOMS rigid/npt/small molecule temp ${TK} ${TK} 100. iso ${PBAR} ${PBAR} 500.
+
 compute TEMP all temp/drude
 
 thermo_style custom step cpu etotal ke pe press vol density c_TEMP[1] c_TEMP[2]
 thermo 20
 
-run 10000
+run 100
 

@@ -66,11 +66,21 @@ delete_bonds ATOMS multi
 System init for delete_bonds ...
 Ewald initialization ...
   using 12-bit tables for long-range coulomb (src/kspace.cpp:342)
+<<<<<<< HEAD
   G vector (1/distance) = 0.35973743
   estimated absolute RMS force accuracy = 0.00043013475
   estimated relative force accuracy = 1.295338e-06
   KSpace vectors: actual max1d max3d = 2084 10 4630
                   kxmax kymax kzmax  = 10 10 10
+=======
+  G vector (1/distance) = 0.36264939
+  grid = 50 50 50
+  stencil order = 5
+  estimated absolute RMS force accuracy = 0.00039532847
+  estimated relative force accuracy = 1.1905199e-06
+  using double precision KISS FFT
+  3d grid and FFT values/proc = 205379 125000
+>>>>>>> 1964a58d22031b8e988c2cb690681a1a5ba02b58
 Generated 0 of 6 mixed pair_coeff terms from geometric mixing rule
 Rebuild special list taking Drude particles into account
 Old max number of 1-2 to 1-4 neighbors: 4
@@ -93,6 +103,7 @@ Deleting bonds ...
   0 total dihedrals, 0 turned on, 0 turned off
   0 total impropers, 0 turned on, 0 turned off
 
+<<<<<<< HEAD
 fix TEMP all langevin/drude ${TK} 100. 1256 ${TDK} 20. 13977 zero yes
 fix TEMP all langevin/drude 300 100. 1256 ${TDK} 20. 13977 zero yes
 fix TEMP all langevin/drude 300 100. 1256 1 20. 13977 zero yes
@@ -103,6 +114,17 @@ fix NPH ATOMS rigid/nph/small molecule iso 1 1 500.
   500 rigid bodies with 2000 atoms
   0.83209864 = max distance from body owner to body atom
 fix NVE DRUDES nve
+=======
+#fix TEMP all langevin/drude ${TK} 100. 1256 ${TDK} 20. 13977 zero yes
+#fix NPH ATOMS rigid/nph/small molecule iso ${PBAR} ${PBAR} 500.
+#fix NVE DRUDES nve
+
+fix 1 all npt temp ${TK} ${TK} 100.0 iso ${PBAR} ${PBAR} 1000.0
+fix 1 all npt temp 300 ${TK} 100.0 iso ${PBAR} ${PBAR} 1000.0
+fix 1 all npt temp 300 300 100.0 iso ${PBAR} ${PBAR} 1000.0
+fix 1 all npt temp 300 300 100.0 iso 1 ${PBAR} 1000.0
+fix 1 all npt temp 300 300 100.0 iso 1 1 1000.0
+>>>>>>> 1964a58d22031b8e988c2cb690681a1a5ba02b58
 
 #fix NPH ATOMS rigid/npt/small molecule temp ${TK} ${TK} 100. iso ${PBAR} ${PBAR} 500.
 
@@ -111,6 +133,7 @@ compute TEMP all temp/drude
 thermo_style custom step cpu etotal ke pe press vol density c_TEMP[1] c_TEMP[2]
 thermo 20
 
+<<<<<<< HEAD
 run 100
 Ewald initialization ...
   using 12-bit tables for long-range coulomb (src/kspace.cpp:342)
@@ -159,3 +182,23 @@ Neighbor list builds = 9
 Dangerous builds = 0
 
 Total wall time: 0:00:19
+=======
+fix dmin all min/drude
+
+run 10
+PPPM initialization ...
+  using 12-bit tables for long-range coulomb (src/kspace.cpp:342)
+  G vector (1/distance) = 0.36264939
+  grid = 50 50 50
+  stencil order = 5
+  estimated absolute RMS force accuracy = 0.00039532847
+  estimated relative force accuracy = 1.1905199e-06
+  using double precision KISS FFT
+  3d grid and FFT values/proc = 205379 125000
+Generated 0 of 6 mixed pair_coeff terms from geometric mixing rule
+Per MPI rank memory allocation (min/avg/max) = 39.5 | 39.5 | 39.5 Mbytes
+   Step          CPU           TotEng         KinEng         PotEng         Press          Volume        Density       c_TEMP[1]      c_TEMP[2]   
+         0   0              5467.6393      1789.0792      3678.5601      90349.518      13824          1.0819809      296.04937      16.200504    
+ERROR: Lost atoms: original 2500 current 2000 (src/thermo.cpp:494)
+Last command: run 10
+>>>>>>> 1964a58d22031b8e988c2cb690681a1a5ba02b58

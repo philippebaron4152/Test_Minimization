@@ -1,0 +1,62 @@
+units real
+boundary p p p
+
+atom_style full
+bond_style harmonic
+angle_style harmonic
+special_bonds lj/coul 0.0 0.0 0.5
+
+pair_style lj/cut/coul/long 6.0
+kspace_style ewald 1.0e-6
+
+comm_modify vel yes
+
+read_data       data.lammps
+replicate       3 3 3
+
+pair_coeff    1    1      0.210939     3.183950  # ODw ODw
+pair_coeff    *   2*      0.000000     0.0
+
+group ATOMS type 1:3
+group CORES type 1
+group DRUDES type 4
+
+velocity DRUDES set 0 0 0
+
+variable TK equal 300.0
+variable TDK equal 1.0
+variable PBAR equal 1.0
+
+neighbor 2.0 bin
+
+timestep 0.5
+
+fix DRUDE all drude C N N D
+compute atom_temp ATOMS temp
+
+velocity ATOMS create ${TK} 12345
+# velocity ATOMS create 1.0 12345
+
+delete_bonds ATOMS multi
+
+#fix TEMP all langevin/drude ${TK} 100. 1256 ${TDK} 20. 13977 zero yes
+#fix NPH ATOMS rigid/nph/small molecule iso ${PBAR} ${PBAR} 500.
+#fix NVE DRUDES nve
+
+fix dmin all min/drude
+fix NPT ATOMS rigid/npt/small molecule temp ${TK} ${TK} 10. iso ${PBAR} ${PBAR} 500. dilate ATOMS
+# fix NVE ATOMS rigid/small molecule #temp ${TK} ${TK} 100. iso ${PBAR} ${PBAR} 500. dilate ATOMS
+# fix tbar ATOMS temp/berendsen ${TK} ${TK} $(1.001*dt)
+
+compute TEMP all temp/drude
+
+thermo_style custom step press density temp c_TEMP[1] c_TEMP[2] c_atom_temp econserve
+thermo 20
+
+dump            1 all custom 1 dump.coord id type x y z vx vy vz ix iy iz fx fy fz
+dump_modify     1 sort id format line "%5d %3d %13.8f %13.8f %13.8f %13.8f %13.8f %13.8f %3d %3d %3d %13.8f %13.8f %13.8f" flush yes
+
+velocity ATOMS zero linear 
+velocity ATOMS zero angular
+
+run 10000
